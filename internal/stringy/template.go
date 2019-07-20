@@ -4,6 +4,8 @@ import (
 	"fmt"
 )
 
+/*v是ns，转换成us、ms、s，方便可读*/
+
 func NanoSecondToHuman(v float64) string {
 	var suffix string
 	switch {
