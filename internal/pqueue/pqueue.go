@@ -4,7 +4,7 @@ import (
 	"container/heap"
 )
 
-// PriorityQueue是Item指针的切片，实现一个最小堆
+// PriorityQueue是Item指针的切片，实现一个最小堆，实现container/heap的interface
 
 type Item struct {
 	Value    interface{}   //可以存任意类型
@@ -55,7 +55,7 @@ func (pq *PriorityQueue) Push(x interface{}) {
 	item.Index = n
 	(*pq)[n] = item //添加这个元素
 }
-
+//将数组的尾部元素弹出并返回
 func (pq *PriorityQueue) Pop() interface{} {
 	n := len(*pq)
 	c := cap(*pq)
@@ -81,6 +81,7 @@ func (pq *PriorityQueue) PeekAndShift(max int64) (*Item, int64) {
 	if item.Priority > max {
 		return nil, item.Priority - max
 	}
+	//移除堆顶元素，heap内部会让数组重新shrift满足堆的性质
 	heap.Remove(pq, 0)
 
 	return item, 0
